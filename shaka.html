@@ -1,6 +1,6 @@
 <html>
 <head>
-<title>Shaka test #11</title>
+<title>Shaka test #12</title>
 <script src="https://ajax.googleapis.com/ajax/libs/shaka-player/4.5.0/shaka-player.compiled.js"></script>
 <script>
 function selectTracks(tracks) {
@@ -47,7 +47,7 @@ async function init(serverURL) {
 
   let offlineUriList = [];
 
-  window.storage.list().then(function(content) {
+  await window.storage.list().then(function(content) {
     console.log(content);
     content.forEach(function(line) {
       offlineUriList.push(line.offlineUri);
