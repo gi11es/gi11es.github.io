@@ -1,6 +1,6 @@
 <html>
 <head>
-<title>Widevine test: worker</title>
+<title>Widevine test: worker + no bitrate</title>
 <script src="https://cdn.dashjs.org/latest/dash.all.debug.js"></script>
 <script>
 function init(serverURL) {
@@ -18,7 +18,7 @@ function init(serverURL) {
     player = dashjs.MediaPlayer().create();
     player.initialize(video, url, false);
 
-    player.updateSettings({
+    /*player.updateSettings({
             'streaming': {
                 'abr': {
                     'maxBitrate': {
@@ -26,7 +26,7 @@ function init(serverURL) {
                     }
                 }
             }
-        });
+        });*/
     
     player.setQualityFor(720);
     player.setProtectionData(protData);
