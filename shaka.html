@@ -1,6 +1,6 @@
 <html>
 <head>
-<title>Shaka test #18</title>
+<title>Shaka test #19</title>
 <script src="https://ajax.googleapis.com/ajax/libs/shaka-player/4.5.0/shaka-player.compiled.js"></script>
 <script>
 function selectTracks(tracks) {
@@ -37,7 +37,8 @@ async function init(serverURL) {
   window.storage.configure({
     offline: {
       progressCallback: setDownloadProgress,
-      trackSelectionCallback: selectTracks
+      trackSelectionCallback: selectTracks,
+      usePersistentLicense: false
     }
   });
   
