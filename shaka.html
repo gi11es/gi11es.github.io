@@ -1,9 +1,9 @@
 <html>
 <head>
-<title>Shaka test #1</title>
+<title>Shaka test #2</title>
 <script src="https://ajax.googleapis.com/ajax/libs/shaka-player/4.5.0/shaka-player.compiled.js"></script>
 <script>
-function init(serverURL) {
+async function init(serverURL) {
   const video = document.getElementById('videoPlayer');
   const player = new shaka.Player();
   await player.attach(video);
@@ -37,7 +37,7 @@ async function fetchAndGo() {
     const response = await fetch('https://worker-white-moon-c279.gilles-7b1.workers.dev/');
     const serverURL = await response.text();
     check();
-    init(serverURL.trim());
+    await init(serverURL.trim());
 }
 </script>
 </head>
