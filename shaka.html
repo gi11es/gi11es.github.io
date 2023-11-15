@@ -1,6 +1,6 @@
 <html>
 <head>
-<title>Shaka test #13</title>
+<title>Shaka test #14</title>
 <script src="https://ajax.googleapis.com/ajax/libs/shaka-player/4.5.0/shaka-player.compiled.js"></script>
 <script>
 function selectTracks(tracks) {
@@ -60,7 +60,9 @@ async function init(serverURL) {
 
   document.getElementById('videoPlayer').style.display = '';
 
-  player.load(offlineUriList[0]);
+  await player.load(offlineUriList[0]);
+
+  player.play();
 }
 
 function check() {
