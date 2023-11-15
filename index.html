@@ -1,6 +1,6 @@
 <html>
 <head>
-<title>Widevine test #6</title>
+<title>Widevine test #7</title>
 <script src="https://cdn.dashjs.org/latest/dash.all.debug.js"></script>
 <script>
 function init(serverURL) {
@@ -16,7 +16,7 @@ function init(serverURL) {
 
     video = document.querySelector("video");
     video.width = 1720;
-    bideo.height = 720;
+    video.height = 720;
     
     player = dashjs.MediaPlayer().create();
     
@@ -60,7 +60,6 @@ function check() {
 async function fetchAndGo() {
     const response = await fetch('https://worker-white-moon-c279.gilles-7b1.workers.dev/');
     const serverURL = await response.text();
-    console.log(serverURL);
     check();
     init(serverURL.trim());
 }
