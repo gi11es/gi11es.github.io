@@ -1,41 +1,46 @@
 <html>
-  <title>Widevine test</title>
+<head>
+<title>Widevine test</title>
+<script src="https://cdn.dashjs.org/latest/dash.all.debug.js"></script>
+<script>
+function init() {
+    var protData = {
+        "com.widevine.alpha": {
+            "serverURL": "https://widevine.gumlet.com/licence/655243eaa14f8c36c7203369/655363d23699cbd2c0171644?expires=1702969933954&token=cb3b5ef181432246761cf3af9b52dd8f040b19fd",
+            "audioRobustness": "SW_SECURE_CRYPTO",
+            "videoRobustness": "SW_SECURE_CRYPTO",
+            priority: 0
+        }
+    };
+    var video,
+        player,
+        url = "https://video.gumlet.io/655243edfc21dc1b6b763c4c/655363d23699cbd2c0171644/main.mpd";
+
+    video = document.querySelector("video");
+    player = dashjs.MediaPlayer().create();
+    player.initialize(video, url, true);
+    player.setProtectionData(protData);
+}
+
+function check() {
+    if (location.protocol === 'http:' && location.hostname !== 'localhost') {
+        var out = 'This page has been loaded under http. This might result in the EME APIs not being available to the player and any DRM-protected content will fail to play. ' +
+            'If you wish to test manifest URLs that require EME support, then <a href=\'https:' + window.location.href.substring(window.location.protocol.length) + '\'>reload this page under https</a>.'
+        var div = document.getElementById('http-warning');
+        div.innerHTML = out;
+        div.style.display = ''
+    }
+}
+</script>
+</head>
 <body>
   <video id="videoPlayer" controls></video>
   <div id="http-warning"></div>
-  <script src="https://cdn.dashjs.org/latest/dash.all.debug.js"></script>
-  <script>
-      function init() {
-          var protData = {
-              "com.widevine.alpha": {
-                  "serverURL": "https://widevine.gumlet.com/licence/655243eaa14f8c36c7203369/655363d23699cbd2c0171644?expires=1702969933954&token=cb3b5ef181432246761cf3af9b52dd8f040b19fd",
-                  "audioRobustness": "SW_SECURE_CRYPTO",
-                  "videoRobustness": "SW_SECURE_CRYPTO",
-                  priority: 0
-              }
-          };
-          var video,
-              player,
-              url = "https://video.gumlet.io/655243edfc21dc1b6b763c4c/655363d23699cbd2c0171644/main.mpd";
-
-          video = document.querySelector("video");
-          player = dashjs.MediaPlayer().create();
-          player.initialize(video, url, true);
-          player.setProtectionData(protData);
-      }
-
-      function check() {
-          if (location.protocol === 'http:' && location.hostname !== 'localhost') {
-              var out = 'This page has been loaded under http. This might result in the EME APIs not being available to the player and any DRM-protected content will fail to play. ' +
-                  'If you wish to test manifest URLs that require EME support, then <a href=\'https:' + window.location.href.substring(window.location.protocol.length) + '\'>reload this page under https</a>.'
-              var div = document.getElementById('http-warning');
-              div.innerHTML = out;
-              div.style.display = ''
-          }
-      }
-
-      check();
-      init();
+  <script>   
+    document.addEventListener('DOMContentLoaded', function () {
+        check();
+        init();
+    });
   </script>
 </body>
 </html>
