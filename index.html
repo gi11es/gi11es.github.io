@@ -1,12 +1,12 @@
 <html>
 <head>
-<title>Widevine test: 10 minute token</title>
+<title>Widevine test: 10 minute token, do not autoplay</title>
 <script src="https://cdn.dashjs.org/latest/dash.all.debug.js"></script>
 <script>
 function init() {
     var protData = {
         "com.widevine.alpha": {
-            "serverURL": "https://widevine.gumlet.com/licence/655243eaa14f8c36c7203369/655363d23699cbd2c0171644?expires=1700041814576&token=0a55693b0ca3f2662b8c7ab6e873f995f645169e",
+            "serverURL": "https://widevine.gumlet.com/licence/655243eaa14f8c36c7203369/655363d23699cbd2c0171644?expires=1700042166900&token=8836ae7589b065bacc1ca03fdc9ec5534a05f907",
             priority: 0
         }
     };
@@ -16,7 +16,7 @@ function init() {
 
     video = document.querySelector("video");
     player = dashjs.MediaPlayer().create();
-    player.initialize(video, url, true);
+    player.initialize(video, url, false);
     player.setProtectionData(protData);
 }
 
