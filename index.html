@@ -1,6 +1,6 @@
 <html>
 <head>
-<title>Widevine test #5</title>
+<title>Widevine test #6</title>
 <script src="https://cdn.dashjs.org/latest/dash.all.debug.js"></script>
 <script>
 function init(serverURL) {
@@ -15,6 +15,8 @@ function init(serverURL) {
         url = "https://video.gumlet.io/655243edfc21dc1b6b763c4c/655497fd3699cbd2c01e369c/main.mpd";
 
     video = document.querySelector("video");
+    video.width = 1720;
+    bideo.height = 720;
     
     player = dashjs.MediaPlayer().create();
     
@@ -37,7 +39,7 @@ function init(serverURL) {
         }
     });
     
-    player.setQualityFor('video', 720);
+    //player.setQualityFor('video', 720);
     player.setProtectionData(protData);
 
     player.setAutoPlay(false);
