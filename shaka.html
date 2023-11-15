@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Offline Playback with Shaka Player</title>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/shaka-player/3.1.2/shaka-player.compiled.js"></script>
+</head>
+<body>
+  <video id="videoElement" controls></video>
+
+  <script>
+    async function downloadAndPlay() {
+      const manifestUri = 'URL_TO_YOUR_MANIFEST_FILE'; // Replace with your manifest URL
+      const offlineManifest = 'offlineManifest.mpd'; // The name of the downloaded manifest file
+      const offlineVideo = 'offlineVideo.mp4'; // The name of the downloaded video file
+
+      try {
+        const response = await fetch(manifestUri);
+        const manifestData = await response.text();
+
+        // Save the manifest for offline playback
+        const blobManifest = new Blob([manifestData], { type: 'application/xml' });
+        const urlManifest = window.URL.createObjectURL(blobManifest);
+        const aManifest = document.createElement('a');
+        aManifest.href = urlManifest;
+        aManifest.download = offlineManifest;
+        aManifest.click();
+
+        // Use Shaka Player to initialize the video element with Widevine support
+        const videoElement = document.getElementById('videoElement');
+        const player = new shaka.Player(videoElement);
+
+        await player.load(urlManifest);
+
+        // Save the video for offline playback
+        const offlineConfig = {
+          progressCallback: (progress, size) => {
+            console.log(`Downloading: ${progress}%`);
+          }
+        };
+        await player.getNetworkingEngine().download(offlineVideo, offlineConfig);
+
+        // Play the downloaded video
+        player.configure({
+          manifest: offlineManifest
+        });
+
+        console.log('Video downloaded and ready for offline playback.');
+
+        // Play the downloaded video
+        videoElement.play();
+      } catch (error) {
+        console.error('Error:', error);
+      }
+    }
+
+    downloadAndPlay();
+  </script>
+</body>
+</html>
