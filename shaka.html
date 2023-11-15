@@ -1,6 +1,6 @@
 <html>
 <head>
-<title>Shaka test #7</title>
+<title>Shaka test #8</title>
 <script src="https://ajax.googleapis.com/ajax/libs/shaka-player/4.5.0/shaka-player.compiled.js"></script>
 <script>
 function selectTracks(tracks) {
@@ -45,9 +45,13 @@ async function init(serverURL) {
 
   document.getElementById('progress').style.display = 'none';
 
+  const offlineList = window.storage.list();
+
+  console.log(offlineList);
+
   window.alert('Fully downloaded, now ready to play');
 
-  player.load(manifestUri);
+  player.load(offlineList[0]);
 }
 
 function check() {
