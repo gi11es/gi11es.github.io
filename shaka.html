@@ -1,6 +1,6 @@
 <html>
 <head>
-<title>Shaka test #6</title>
+<title>Shaka test #7</title>
 <script src="https://ajax.googleapis.com/ajax/libs/shaka-player/4.5.0/shaka-player.compiled.js"></script>
 <script>
 function selectTracks(tracks) {
@@ -43,7 +43,11 @@ async function init(serverURL) {
   
   await window.storage.store(manifestUri).promise;
 
-  console.log('Downloaded?');
+  document.getElementById('progress').style.display = 'none';
+
+  window.alert('Fully downloaded, now ready to play');
+
+  player.load(manifestUri);
 }
 
 function check() {
