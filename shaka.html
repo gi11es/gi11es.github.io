@@ -1,6 +1,6 @@
 <html>
 <head>
-<title>Shaka test #4</title>
+<title>Shaka test #5</title>
 <script src="https://ajax.googleapis.com/ajax/libs/shaka-player/4.5.0/shaka-player.compiled.js"></script>
 <script>
 function selectTracks(tracks) {
@@ -18,7 +18,7 @@ function selectTracks(tracks) {
 }
   
 function setDownloadProgress(content, progress) {
-  console.log('Download progress: ' + progress + ' for content ' + content);
+  document.getElementById('progress').textContent = 'Downloading: '+ Math.round(progress * 100) + '%';
 }
   
 async function init(serverURL) {
@@ -41,7 +41,9 @@ async function init(serverURL) {
     }
   });
   
-  window.storage.store(manifestUri);
+  await window.storage.store(manifestUri);
+
+  console.log('Downloaded?');
 }
 
 function check() {
@@ -63,8 +65,8 @@ async function fetchAndGo() {
 </script>
 </head>
 <body>
-  <video id="videoPlayer" controls></video>
-  <div id="http-warning"></div>
+  <video id="videoPlayer" controls class="hidden"></video>
+  <div id="progress"></div>
   <script>
       document.addEventListener('DOMContentLoaded', fetchAndGo);
   </script>
