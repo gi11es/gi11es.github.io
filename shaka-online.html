@@ -18,8 +18,8 @@ async function init(serverURL) {
   try {
     await player.load('https://video.gumlet.io/655243edfc21dc1b6b763c4c/6554c7a03699cbd2c01f0b68/main.mpd');
     // The video should now be playing!  
-  } catch (e) {
-    console.error(e);
+  } catch (error) {
+    console.error('Error code', error.code, 'object', error);
   }
 }
 
@@ -34,10 +34,16 @@ function check() {
 }
 
 async function fetchAndGo() {
+  shaka.polyfill.installAll();
+
+  if (shaka.Player.isBrowserSupported()) {
     const response = await fetch('https://worker-white-moon-c279.gilles-7b1.workers.dev/');
     const serverURL = await response.text();
     check();
     await init(serverURL.trim());
+  } else {
+    console.error('Browser not supported!');
+  }
 }
 </script>
 </head>
