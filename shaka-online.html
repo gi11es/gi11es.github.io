@@ -1,6 +1,6 @@
 <html>
 <head>
-<title>Shaka test - online play #6</title>
+<title>Shaka test - online play #7</title>
 <script src="https://ajax.googleapis.com/ajax/libs/shaka-player/4.5.0/shaka-player.compiled.js"></script>
 <script>
 async function init(serverURL) {
@@ -16,10 +16,7 @@ async function init(serverURL) {
 
   // Try to load a manifest.
   try {
-    // Original on gumlet: https://video.gumlet.io/655243edfc21dc1b6b763c4c/6554c7a03699cbd2c01f0b68/main.mpd
-    // Copy on bunny: https://layer.b-cdn.net/6554c7a03699cbd2c01f0b68/main.mpd
-    // Copy on bunny with origin setup: https://layer-origin.b-cdn.net/655243edfc21dc1b6b763c4c/6554c7a03699cbd2c01f0b68/main.mpd
-    await player.load('https://layer-origin.b-cdn.net/655243edfc21dc1b6b763c4c/6554c7a03699cbd2c01f0b68/main.mpd');
+    await player.load('https://layer-gumlet.b-cdn.net/6554c7a03699cbd2c01f0b68/main.mpd');
     // The video should now be playing!  
   } catch (error) {
     console.error('Error code', error.code, 'object', error);
